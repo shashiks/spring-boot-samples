@@ -15,6 +15,12 @@ HELP.md
 .metadata
 .recommenders
 
+ws2
+.metadata
+.recommenders
+.DS_Store
+
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
