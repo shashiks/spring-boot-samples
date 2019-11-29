@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: shaksoni
+Build-Jdk: 10.0.1
+Implementation-Title: product-service-client
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: io.finloop
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/product-service-client
+Created-By: Maven Integration for Eclipse
+

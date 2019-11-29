@@ -1,0 +1,93 @@
+server:
+  port: 8200
+spring:
+  profiles: default
+  application:
+    name: product-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/hapticket
+    username: root
+    password: Welcome1@#
+    platform: mysql
+    driverClassName: com.mysql.jdbc.Driver
+    initialization-mode: NEVER
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 5
+      maximum-pool-size: 10
+      idle-timeout: 300000
+      max-lifetime: 1200000
+  zipkin:
+    enabled: true
+    baseUrl: http://localhost:9411
+    service:
+      name: product-service
+    sender:
+      type: web
+  sleuth:
+    enabled: true
+    web:
+      enabled: true
+    sampler:
+      probability: 1.0
+      
+jpa:
+  database-platform: org.hibernate.dialect.MySQLDialect
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        
+
+        
+        
+---
+        
+server:
+  port: 8200
+spring:
+  profiles: container
+  application:
+    name: product-service
+  datasource:
+    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    initialization-mode: NEVER
+    platform: mysql
+    driverClassName: com.mysql.jdbc.Driver
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 5
+      maximum-pool-size: 10
+      idle-timeout: 300000
+      max-lifetime: 1200000
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+  zipkin:
+    baseUrl: http://localhost:9411
+    service:
+      name: product-service
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      percentage: 1.0
+    
+    
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER_HOST}:${EUREKA_SERVER_PORT}/eureka
+  instance:
+    preferIpAddress: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'    

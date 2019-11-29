@@ -1,0 +1,3 @@
+service_name=hystrix-dashboard
+application_packages=org.springframework.boot
+server_urls=http://127.0.0.1:8200

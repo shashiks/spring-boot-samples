@@ -1,0 +1,49 @@
+server:
+  port: 8100
+
+  
+spring:
+  application:
+    name: product-service-client
+  zipkin:
+    enabled: true
+    baseUrl: http://localhost:9411
+    service:
+      name: product-client
+    sender:
+      type: web
+  sleuth:
+    enabled: true
+    web:
+      enabled: true
+    sampler:
+      probability: 1.0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*' 
+  
+  
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+
+---
+spring:
+  profiles: container
+  application:
+    name: product-service-client   
+    
+eureka:
+  client:    
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER_HOST}:${EUREKA_SERVER_PORT}/eureka
+  instance:
+    preferIpAddress: true    
+
+      
+
+      

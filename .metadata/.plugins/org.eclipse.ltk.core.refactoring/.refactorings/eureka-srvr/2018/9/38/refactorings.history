@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;SpringCloudApp.java&apos; to &apos;hello-service/src/main/java/io.finloop.haptickt&apos;&#x0A;- Original project: &apos;haptickt&apos;&#x0A;- Destination element: &apos;hello-service/src/main/java/io.finloop.haptickt&apos;&#x0A;- Original element: &apos;io.finloop.haptickt.SpringCloudApp.java&apos;" description="Copy compilation unit" destination="=hello-service/src\/main\/java&lt;io.finloop.haptickt" element1="/src\/main\/java&lt;io.finloop.haptickt{SpringCloudApp.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1537356849589" units="1" version="1.0"/>
+</session>
