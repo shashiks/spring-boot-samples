@@ -1,3 +1,0 @@
-service_name=my-cool-service
-application_packages=org.example,org.another.example
-server_urls=http://localhost:8200

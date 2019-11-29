@@ -1,6 +1,0 @@
-1537940308237	Rename resource 'DockerFile'
-1537942594939	Move 'Dockerfile' to 'docker'
-1537944785541	Rename type 'SpringCloudApp'
-1537947520308	Copy file
-1537960445189	Rename resource 'application.properties'
-1537960868945	Delete element
