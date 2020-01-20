@@ -1,11 +1,9 @@
 package io.finloop.haptickt;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,24 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
-import lombok.extern.slf4j.Slf4j;
-
-
-@Slf4j
+//@Slf4j
 @RestController
 @RequestMapping("/")
 public class ProductClientController {
 
 	
 	@Autowired
-    @LoadBalanced
+//    @LoadBalanced
     private RestTemplate restTemplate;
 	
 	@Autowired
 	private Environment env;
+	
+	static final String productUrl =  "http://service-product-svc:8300/products/"; //"http://product-service/products/";
 	
 	
 	@RequestMapping("/")
@@ -41,32 +36,32 @@ public class ProductClientController {
 	}
   
 	
-	@HystrixCommand(
-			fallbackMethod = "getDefaultProductCommand",
-			groupKey = "GetProducts", commandKey = "GetProducts", threadPoolKey = "GetProducts", 
-			commandProperties = {
-				@HystrixProperty(name = "execution.isolation.strategy", value = "THREAD"),
-		        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "30000"),
-		        @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "4"),
-		        @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "60000"),
-		        @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "180000") 
-		    }, 
-			threadPoolProperties = {
-		        @HystrixProperty(name = "coreSize", value = "30"),
-		        @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "180000") 
-		     }
-	)	
+//	@HystrixCommand(
+//			fallbackMethod = "getDefaultProductCommand",
+//			groupKey = "GetProducts", commandKey = "GetProducts", threadPoolKey = "GetProducts", 
+//			commandProperties = {
+//				@HystrixProperty(name = "execution.isolation.strategy", value = "THREAD"),
+//		        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "30000"),
+//		        @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "4"),
+//		        @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "60000"),
+//		        @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "180000") 
+//		    }, 
+//			threadPoolProperties = {
+//		        @HystrixProperty(name = "coreSize", value = "30"),
+//		        @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "180000") 
+//		     }
+//	)	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/product/{id}")
 	public List<ProductValue> getProducts(@PathVariable final int id) {
 
-		log.info("replying from Client");
-		Object resp = restTemplate.getForEntity("http://product-service/products/", Object.class);
-		log.info("Got response " + resp);
+//		log.info("replying from Client");
+		Object resp = restTemplate.getForEntity(productUrl, Object.class);
+//		log.info("Got response " + resp);
 		ResponseEntity resEntity = (ResponseEntity) resp;
-		log.info("Resp entity " + resEntity);
+//		log.info("Resp entity " + resEntity);
 		List<ProductValue> products = (List<ProductValue>) resEntity.getBody();
-		log.info("products " + products);
+//		log.info("products " + products);
 		return products;
 		
 //		Can also use below syntax to get records directly without response body
@@ -83,15 +78,15 @@ public class ProductClientController {
 //		return products;
 	}
 	
-	
-	List<ProductValue> getDefaultProductCommand(int productCode) {
-		List<ProductValue> l = new ArrayList<>();
-		l.add(ProductValue.builder().id(4L).name("FallBack").description("Static fallback product").build());
-		l.add(ProductValue.builder().id(1L).name("Info Prod").description("from " + env.getProperty("local.server.port")).build());
-		l.add(ProductValue.builder().id(2L).name("First Prod").description("First Description").build());
-		l.add(ProductValue.builder().id(3L).name("Second Prod").description("Second Description").build());
-		return l;
-    }
+//	
+//	List<ProductValue> getDefaultProductCommand(int productCode) {
+//		List<ProductValue> l = new ArrayList<>();
+//		l.add(ProductValue.builder().id(4L).name("FallBack").description("Static fallback product").build());
+//		l.add(ProductValue.builder().id(1L).name("Info Prod").description("from " + env.getProperty("local.server.port")).build());
+//		l.add(ProductValue.builder().id(2L).name("First Prod").description("First Description").build());
+//		l.add(ProductValue.builder().id(3L).name("Second Prod").description("Second Description").build());
+//		return l;
+//    }
 	
 	
 	

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: product-svc-client
+  name: product-svc-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-svc-client
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: product-svc-client
+    spec:
+      containers:
+      - image: shaksonik/product-svc-client:1.1
+        name: product-svc-client
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: svc-product-client
+  name: svc-product-client
+spec:
+  ports:
+  - name: 8100-8100
+    port: 8100
+    protocol: TCP
+    targetPort: 8100
+  - name: 8300-8300
+    port: 8300
+    protocol: TCP
+    targetPort: 8300
+  selector:
+    app: svc-product-client
+  type: ClusterIP
+status:
+  loadBalancer: {}

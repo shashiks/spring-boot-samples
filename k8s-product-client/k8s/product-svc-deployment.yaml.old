@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: product-svc
+  name: product-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-svc
+      tier: svc
+      track: stable
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: product-svc
+        tier: svc
+        track: stable
+    spec:
+      containers:
+      - image: shaksonik/product-svc:1.1
+        name: product-svc
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: svc-product
+spec:
+  ports:
+  - name: 3306-3306
+    port: 3306
+    protocol: TCP
+    targetPort: 3306
+  - name: 8300-8300
+    port: 8300
+    protocol: TCP
+    targetPort: 8300
+  selector:
+    app: product-svc
+    tier: svc

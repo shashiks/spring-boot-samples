@@ -1,5 +1,10 @@
+.classpath
+.project
+.settings/
+/target/**
+
 HELP.md
-**/*target/
+**/*target/*
 **/*.log
 **/*.DS_store
 **/*node_modules

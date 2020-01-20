@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-client
+spec:
+  selector:
+    app: product-client
+    tier: frontend
+  ports:
+  - name: 8100-8100
+    port: 8100
+    protocol: TCP
+    targetPort: 8100
+  - name: 8300-8300
+    port: 8300
+    protocol: TCP
+    targetPort: 8300
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-product-client
+spec:
+  selector:
+    matchLabels:
+      app: product-client
+      tier: frontend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: product-client
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+      - image: shaksonik/product-client:1.1
+        name: product-client
+        resources: {}
