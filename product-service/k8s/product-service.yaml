@@ -1,46 +1,46 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: product-client
+  name: product-svc
 spec:
   selector:
-    app: product-client
-    tier: frontend
+    app: product-svc
+    tier: backend
   ports:
-  - name: 8100-8100
-    port: 8100
-    protocol: TCP
-    targetPort: 8100
   - name: 8300-8300
     port: 8300
     protocol: TCP
     targetPort: 8300
+  - name: 3306-3306
+    port: 3306
+    protocol: TCP
+    targetPort: 3306
   type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: product-client
+  name: product-svc
 spec:
   selector:
     matchLabels:
-      app: product-client
-      tier: frontend
+      app: product-svc
+      tier: backend
       track: stable
   replicas: 1
   template:
     metadata:
       labels:
-        app: product-client
-        tier: frontend
+        app: product-svc
+        tier: backend
         track: stable
     spec:
       containers:
-      - image: shaksonik/product-client:1.2.1
-        name: product-client
+      - image: shaksonik/product-svc:1.2.1
+        name: product-svc
         ports:
         - name: svc-http-port
-          containerPort: 8100
-        - name: svc-dep-port
           containerPort: 8300
+        - name: svc-db-port
+          containerPort: 3306
         resources: {}

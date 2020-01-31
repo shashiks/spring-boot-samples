@@ -27,7 +27,7 @@ public class ProductClientController {
 	@Autowired
 	private Environment env;
 	
-	static final String productUrl =  "http://service-product-svc:8300/products/"; //"http://product-service/products/";
+	static final String productUrl =  "http://product-svc:8300/products/"; //"http://product-service/products/";
 	
 	
 	@RequestMapping("/")
