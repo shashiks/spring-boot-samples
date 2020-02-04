@@ -56,6 +56,7 @@ public class ProductController {
 		products.add(p);
 //		products.add(ProductEntity.builder().id(100l).name("Info Product").description("From Port " + env.getProperty("server.port")).build());
 //		log.info("sending data from service" + products);
+		System.out.println("sending resp product-svc -- " + System.currentTimeMillis());
 		return products;
 	}
 	
