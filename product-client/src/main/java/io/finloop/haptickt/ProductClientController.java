@@ -32,7 +32,7 @@ public class ProductClientController {
 	
 	@RequestMapping("/")
 	public String home() {
-		return "Home from product-client running at port: " + env.getProperty("local.server.port");
+		return "Home from product-client running at port with debug: " + env.getProperty("local.server.port");
 	}
   
 	

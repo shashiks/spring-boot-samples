@@ -48,6 +48,7 @@ public class ProductController {
 //	)		
 	@GetMapping(path = "/products",  produces = {MediaType.APPLICATION_JSON_VALUE})
 	public List<ProductEntity> getProducts() {
+		System.out.println("Sakffold Logs added");
 		List<ProductEntity> products = productRepo.findAll();
 		ProductEntity p = new ProductEntity();
 		p.setId(100L);
